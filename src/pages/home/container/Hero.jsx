@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <section className="container mx-auto flex flex-col px-5 py-5 lg:flex-row">
       <div className="mt-10 lg:w-1/2 relative">
-        <h1 className="font-roboto text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px]">
+        <h1 className="font-roboto text-3xl text-center font-bold text-black md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px]">
           Read the most interesting articles
         </h1>
         <p className="text-dark-light mt-4 text-center md:text-xl lg:text-base xl:text-xl lg:text-left">
@@ -24,12 +24,12 @@ const Hero = () => {
               placeholder="Find Articles..."
             />
             {/* Conditionally render the button based on screen size */}
-            <button className="hidden md:inline absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-white font-semibold rounded-lg px-5 py-3 md:w-fit md:py-2">
+            <button className="hidden md:inline absolute right-3 top-1/2 -translate-y-1/2 border-black border-2 hover:opacity-[0.7] delay-20 text-black font-semibold rounded-lg px-5 py-3 md:w-fit md:py-2">
               Search
             </button>
           </div>
           {/* Render the button outside the input for smaller screens */}
-          <button className="w-full bg-primary text-white font-semibold rounded-lg px-5 py-3 md:hidden">
+          <button className="w-full border-black border-2 text-black font-semibold rounded-lg px-5 py-3 md:hidden">
             Search
           </button>
         </div>
@@ -38,13 +38,13 @@ const Hero = () => {
             Popular Tags:
           </span>
           <ul className="flex flex-wrap gap-x-2.5 gap-y-2.5 mt-3 lg:text-sm xl:text-base">
-            <li className="rounded-lg bg-primary bg-opacity-10 py-1.5 px-3 text-primary font-semibold">
+            <li className="rounded-lg bg-black bg-opacity-10 py-1.5 px-3 text-black font-semibold">
               Design
             </li>
-            <li className="rounded-lg bg-primary bg-opacity-10 py-1.5 px-3 text-primary font-semibold">
+            <li className="rounded-lg bg-black  bg-opacity-10 py-1.5 px-3 text-black  font-semibold">
               User Experience
             </li>
-            <li className="rounded-lg bg-primary bg-opacity-10 py-1.5 px-3 text-primary font-semibold">
+            <li className="rounded-lg bg-black  bg-opacity-10 py-1.5 px-3 text-black font-semibold">
               User Interface
             </li>
           </ul>
@@ -52,7 +52,7 @@ const Hero = () => {
       </div>
       <div className="hidden lg:block lg:1/2">
         <img
-          className="w-full"
+          className="w-3/4 h-auto ml-20"
           src={images.HeroImage}
           alt="users are reading articles"
         />
