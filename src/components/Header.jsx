@@ -50,6 +50,7 @@ const NavItem = ({ item }) => {
             <ul className="bg-black lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
               {item.items.map((page, index) => (
                 <a
+                  key={index}
                   href="/"
                   className="hover:bg-dark-hard lg:bg-black lg:text-white hover:text-white px-4 py-2 text-white lg:hover:bg-dark-hard z-10 lg:hover:text-white"
                 >
@@ -77,7 +78,9 @@ const Header = () => {
     <section className="sticky top-0 left-0 right-0 z-50 bg-white">
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <div>
-          <img className="w-25 h-9" src={images.Logo} alt="logo" />
+          <a href="/">
+            <img className="w-25 h-9" src={images.Logo} alt="logo" />
+          </a>
         </div>
         <div className="lg:hidden z-50">
           {navIsVisible ? (

@@ -12,19 +12,29 @@ const Footer = () => {
           <h3 className="text-white font-bold md:text-lg">Product</h3>
           <ul className="text-white text-sm md:text-lg mt-5 space-y-4">
             <li>
-              <a href="/">Landing Page</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Landing Page
+              </a>
             </li>
             <li>
-              <a href="/">Features</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Features
+              </a>
             </li>
             <li>
-              <a href="/">Documentation</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Documentation
+              </a>
             </li>
             <li>
-              <a href="/">Partners</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Partners
+              </a>
             </li>
             <li>
-              <a href="/">Pricing</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Pricing
+              </a>
             </li>
           </ul>
         </div>
@@ -32,19 +42,29 @@ const Footer = () => {
           <h3 className="text-white font-bold md:text-lg">Services</h3>
           <ul className="text-white text-sm md:text-lg mt-5 space-y-4">
             <li>
-              <a href="/">Documentation</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Documentation
+              </a>
             </li>
             <li>
-              <a href="/">Design</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Design
+              </a>
             </li>
             <li>
-              <a href="/">Illustrations</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Illustrations
+              </a>
             </li>
             <li>
-              <a href="/">Themes</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Themes
+              </a>
             </li>
             <li>
-              <a href="/">UI-UX</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                UI-UX
+              </a>
             </li>
           </ul>
         </div>
@@ -52,19 +72,29 @@ const Footer = () => {
           <h3 className="text-white font-bold md:text-lg">Company</h3>
           <ul className="text-white text-sm md:text-lg mt-5 space-y-4">
             <li>
-              <a href="/">About</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                About
+              </a>
             </li>
             <li>
-              <a href="/">Terms</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Terms
+              </a>
             </li>
             <li>
-              <a href="/">Privacy Policy</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Privacy Policy
+              </a>
             </li>
             <li>
-              <a href="/">Careers</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Careers
+              </a>
             </li>
             <li>
-              <a href="/">ESG</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                ESG
+              </a>
             </li>
           </ul>
         </div>
@@ -72,51 +102,59 @@ const Footer = () => {
           <h3 className="text-white font-bold md:text-lg">More</h3>
           <ul className="text-white text-sm md:text-lg mt-5 space-y-4">
             <li>
-              <a href="/">Documentation</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                Documentation
+              </a>
             </li>
             <li>
-              <a href="/">License</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                License
+              </a>
             </li>
             <li>
-              <a href="/">License</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                License
+              </a>
             </li>
             <li>
-              <a href="/">History</a>
+              <a className="hover:opacity-[0.8]" href="/">
+                History
+              </a>
             </li>
           </ul>
         </div>
-        <div className="col-span-10 md:order-first md:col-span-4 lg:col-span-2">
+        <div className="col-span-10 md:order-first md:col-span-4 lg:col-span-2 ">
           <img
             src={images.Logo}
             alt=""
-            className="brightness-0 invert mx-auto md:mx-0"
+            className="brightness-0 invert mx-auto  md:mx-0 h-12"
           />
           <p className="text-white md:text-lg text-sm text-center mt-4 md:text-left lg:text-sm">
             Get the most reliable up-to-date information today.
           </p>
           <ul className="flex justify-center items-center mt-5 space-x-4 text-white md:justify-start lg:text-2xl">
             <li>
-              <a href="/">
+              <a className="hover:opacity-[0.8]" href="/">
                 <RiTwitterXFill />
               </a>
             </li>
             <li>
-              <a href="/">
+              <a className="hover:opacity-[0.8]" href="/">
                 <BsLinkedin />
               </a>
             </li>
             <li>
-              <a href="/">
+              <a className="hover:opacity-[0.8]" href="/">
                 <BsInstagram />
               </a>
             </li>
             <li>
-              <a href="/">
+              <a className="hover:opacity-[0.8]" href="/">
                 <BsMeta />
               </a>
             </li>
             <li>
-              <a href="/">
+              <a className="hover:opacity-[0.8]" href="/">
                 <AiFillYoutube />
               </a>
             </li>

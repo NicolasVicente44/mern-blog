@@ -5,6 +5,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import { images } from "../../../constants";
 import { Link } from "react-router-dom";
 import SuggestedPosts from "./container/SuggestedPosts";
+import CommentsArea from "../../../components/comments/CommentsArea";
 
 const BreadcrumbsData = [
   { name: "Home", link: "/" },
@@ -51,7 +52,7 @@ const postsData = [
 const ArticleDetailPage = () => {
   return (
     <MainLayout>
-      <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 ">
+      <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
         <article className="flex-1">
           <Breadcrumbs data={BreadcrumbsData} />
           <img
@@ -61,11 +62,11 @@ const ArticleDetailPage = () => {
           />
           <Link
             to="/blog?category=selectedCategory"
-            className="text-black text-sm font-roboto inline-block mt-4"
+            className="text-black text-sm font-roboto inline-block mt-4 md:text-base"
           >
             EDUCATION
           </Link>
-          <h1 className="text-xl font-medium font-roboto mt-4 text-black">
+          <h1 className="text-xl font-medium font-roboto mt-4 text-black md:text-[26px]">
             Help Teach Programming to Children
           </h1>
           <div className="mt-4 text-gray-600">
@@ -80,11 +81,13 @@ const ArticleDetailPage = () => {
               recusandae rem!
             </p>
           </div>
+          <CommentsArea className="mt-10" loggedInUserId="a" />
         </article>
         <SuggestedPosts
-          header="Latest Article"
+          header="Recent Articles"
           posts={postsData}
           tags={tagsData}
+          className="mt-8 lg:mt-0  lg:max-w-xs"
         />
       </section>
     </MainLayout>
