@@ -6,6 +6,7 @@ import { images } from "../../../constants";
 import { Link } from "react-router-dom";
 import SuggestedPosts from "./container/SuggestedPosts";
 import CommentsArea from "../../../components/comments/CommentsArea";
+import SocialMediaShareButtons from "../../../components/SocialMediaShareButtons";
 
 const BreadcrumbsData = [
   { name: "Home", link: "/" },
@@ -83,12 +84,23 @@ const ArticleDetailPage = () => {
           </div>
           <CommentsArea className="mt-10" loggedInUserId="a" />
         </article>
-        <SuggestedPosts
-          header="Recent Articles"
-          posts={postsData}
-          tags={tagsData}
-          className="mt-8 lg:mt-0  lg:max-w-xs"
-        />
+        <div>
+          <SuggestedPosts
+            header="Recent Articles"
+            posts={postsData}
+            tags={tagsData}
+            className="mt-8 lg:mt-0  lg:max-w-xs"
+          />
+          <div className="mt-7">
+            <h2 className="font-roboto font-medium text-black mb-4 md:text-xl">
+              Share on:
+            </h2>
+            <SocialMediaShareButtons
+              url={encodeURI("/")}
+              title={encodeURIComponent("/")}
+            />
+          </div>
+        </div>
       </section>
     </MainLayout>
   );
