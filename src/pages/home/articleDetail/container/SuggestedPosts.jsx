@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { images } from "../../../../constants";
 
 const SuggestedPosts = ({ className, header, posts = [], tags }) => {
   return (
@@ -17,7 +18,7 @@ const SuggestedPosts = ({ className, header, posts = [], tags }) => {
           >
             <img
               className="aspect-square object-cover rounded-lg w-1/5"
-              src={item.image}
+              src={images.samplePostImage}
               alt="articleimage"
             />
             <div className="text-sm font-roboto text-black font-medium">

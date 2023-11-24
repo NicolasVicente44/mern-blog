@@ -1,107 +1,108 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+import BreadCrumbs from "../../../components/Breadcrumbs";
 import MainLayout from "../../../components/MainLayout";
-import Article from "../container/Article";
-import Breadcrumbs from "../../../components/Breadcrumbs";
-import { images } from "../../../constants";
-import { Link } from "react-router-dom";
+import SocialShareButtons from "../../../components/SocialMediaShareButtons";
+import { images, stables } from "../../../constants";
 import SuggestedPosts from "./container/SuggestedPosts";
+import { useQuery } from "@tanstack/react-query";
+import { getAllPosts, getSinglePost } from "../../../services/posts";
+import ArticleDetailSkeleton from "../../../pages/home/articleDetail/components/ArticleDetialSkeleton";
+import ErrorMessage from "../../../components/ErrorMessage";
+import { useSelector } from "react-redux";
+import parseJsonToHtml from "../../../utils/parseJsonToHtml";
+import Editor from "../../../components/editor/Editor";
 import CommentsArea from "../../../components/comments/CommentsArea";
-import SocialMediaShareButtons from "../../../components/SocialMediaShareButtons";
-
-const BreadcrumbsData = [
-  { name: "Home", link: "/" },
-  { name: "Blog", link: "/blog" },
-  { name: "Article Title", link: "/blog/1" },
-];
-
-const tagsData = [
-  "Medical",
-  "Lifestyle",
-  "Education",
-  "Food",
-  "Finance",
-  "Technology",
-];
-
-const postsData = [
-  {
-    _id: "1",
-    image: images.post1,
-    title: "Help Children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-  {
-    _id: "2",
-    image: images.post1,
-    title: "Help Children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-  {
-    _id: "3",
-    image: images.post1,
-    title: "Help Children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-  {
-    _id: "4",
-    image: images.post1,
-    title: "Help Children get better education",
-    createdAt: "2023-01-28T15:35:53.607+0000",
-  },
-];
 
 const ArticleDetailPage = () => {
+  const { slug } = useParams();
+  const userState = useSelector((state) => state.user);
+  const [breadCrumbsData, setbreadCrumbsData] = useState([]);
+  const [body, setBody] = useState(null);
+
+  const { data, isLoading, isError } = useQuery({
+    queryFn: () => getSinglePost({ slug }),
+    queryKey: ["blog", slug],
+    onSuccess: (data) => {
+      console.log(data);
+      setbreadCrumbsData([
+        { name: "Home", link: "/" },
+        { name: "Blog", link: "/blog" },
+        { name: "Article title", link: `/blog/${data.slug}` },
+      ]);
+      setBody(parseJsonToHtml(data?.body));
+    },
+  });
+
+  const { data: postsData } = useQuery({
+    queryFn: () => getAllPosts(),
+    queryKey: ["posts"],
+  });
+
   return (
     <MainLayout>
-      <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
-        <article className="flex-1">
-          <Breadcrumbs data={BreadcrumbsData} />
-          <img
-            className="rounded-xl w-full"
-            src={images.post1}
-            alt="articleimage"
-          />
-          <Link
-            to="/blog?category=selectedCategory"
-            className="text-black text-sm font-roboto inline-block mt-4 md:text-base"
-          >
-            EDUCATION
-          </Link>
-          <h1 className="text-xl font-medium font-roboto mt-4 text-black md:text-[26px]">
-            Help Teach Programming to Children
-          </h1>
-          <div className="mt-4 text-gray-600">
-            <p className="leading-7">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-              veniam sint repellendus? Ullam assumenda repudiandae beatae
-              doloremque accusamus voluptatum dignissimos, dolore dolor maiores
-              cupiditate fugit error aliquid ducimus asperiores. Tempore? Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Soluta odio at
-              aspernatur sapiente tempore minima minus, modi hic, harum eligendi
-              asperiores beatae! Voluptates quam fugit blanditiis iure porro
-              recusandae rem!
-            </p>
-          </div>
-          <CommentsArea className="mt-10" loggedInUserId="a" />
-        </article>
-        <div>
-          <SuggestedPosts
-            header="Recent Articles"
-            posts={postsData}
-            tags={tagsData}
-            className="mt-8 lg:mt-0  lg:max-w-xs"
-          />
-          <div className="mt-7">
-            <h2 className="font-roboto font-medium text-black mb-4 md:text-xl">
-              Share on:
-            </h2>
-            <SocialMediaShareButtons
-              url={encodeURI("/")}
-              title={encodeURIComponent("/")}
+      {isLoading ? (
+        <ArticleDetailSkeleton />
+      ) : isError ? (
+        <ErrorMessage />
+      ) : (
+        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
+          <article className="flex-1">
+            <BreadCrumbs data={breadCrumbsData} />
+            <img
+              className="rounded-xl w-full"
+              src={
+                data?.photo
+                  ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
+                  : images.samplePostImage
+              }
+              alt={data?.title}
             />
+            <div className="mt-4 flex gap-2">
+              {data?.categories.map((category) => (
+                <Link
+                  to={`/blog?category=${category.name}`}
+                  className="text-primary text-sm font-roboto inline-block md:text-base"
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+            <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
+              {data?.title}
+            </h1>
+            <div className="w-full">
+            {!isLoading && !isError && (
+                <Editor content={data?.body} editable={false} />
+              )}
+            </div>
+            <CommentsArea
+              comments={data?.comments}
+              className="mt-10"
+              loggedInUserId={userState?.userInfo?._id}
+              postSlug={slug}
+            />
+          </article>
+          <div>
+            <SuggestedPosts
+              header="Latest Article"
+              posts={postsData?.data}
+              tags={data?.tags}
+              className="mt-8 lg:mt-0 lg:max-w-xs"
+            />
+            <div className="mt-7">
+              <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
+                Share on:
+              </h2>
+              <SocialShareButtons
+                url={encodeURI(window.location.href)}
+                title={encodeURIComponent(data?.title)}
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </MainLayout>
   );
 };

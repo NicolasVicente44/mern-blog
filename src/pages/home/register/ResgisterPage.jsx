@@ -3,7 +3,7 @@ import MainLayout from "../../../components/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { signup } from "../../../services/index/users";
+import { signup } from "../../../services/users";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../../store/reducers/userReducers";

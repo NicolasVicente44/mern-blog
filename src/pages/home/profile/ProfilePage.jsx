@@ -2,13 +2,20 @@ import React from "react";
 import MainLayout from "../../../components/MainLayout";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import { getUserProfile } from "../../../services/index/users";
+import { getUserProfile, updateProfile } from "../../../services/users";
+import ProfilePicture from "../../../components/ProfilePicture";
+import { userActions } from "../../../store/reducers/userReducers";
+import { useDispatch } from "react-redux";
+import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function ProfilePage() {
   const navigate = useNavigate();
   const userState = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   const {
     data: profileData,
@@ -18,6 +25,29 @@ function ProfilePage() {
     queryKey: ["profile"],
     queryFn: () => {
       return getUserProfile({ token: userState.userInfo.token });
+    },
+  });
+
+  const { mutate, updateProfileIsLoading } = useMutation({
+    mutationFn: ({ name, email, password }) => {
+      return updateProfile({
+        token: userState.userInfo.token,
+        userData: {
+          name,
+          email,
+          password,
+        },
+      });
+    },
+    onSuccess: (data) => {
+      dispatch(userActions.setUserInfo(data));
+      localStorage.setItem("account", JSON.stringify(data));
+      queryClient.invalidateQueries(["profile"]);
+      toast.success("Profile has been updated!");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.log(error);
     },
   });
 
@@ -38,12 +68,16 @@ function ProfilePage() {
     mode: "onChange",
   });
 
-  const submitHandler = (data) => {};
+  const submitHandler = (data) => {
+    const { name, email, password } = data;
+    mutate({ name, email, password });
+  };
 
   return (
     <MainLayout>
-      <section className="container mx-auto px-5 py-10">
+      <section className="relative container mx-auto px-5 py-10">
         <div className="w-full max-w-sm mx-auto">
+          <ProfilePicture avatar={profileData?.avatar} />
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="flex flex-col mb-6 w-full">
               <label htmlFor="name" className="text-[#5a7184]">
@@ -104,22 +138,13 @@ function ProfilePage() {
             </div>
             <div className="flex flex-col mb-6 w-full">
               <label htmlFor="password" className="text-[#5a7184]">
-                Password
+                New Password (optional)
               </label>
               <input
                 type="password"
                 id="password"
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "Password is required",
-                  },
-                  minLength: {
-                    value: 8,
-                    message: "Password length must be at least 8 characters",
-                  },
-                })}
-                placeholder="Enter Password"
+                {...register("password")}
+                placeholder="Enter a new Password"
                 className={`placeholder:text-[#959ead] text-black mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
                   errors.password ? "border-red-500" : "border-[#c3cad9]"
                 }`}
@@ -133,10 +158,10 @@ function ProfilePage() {
 
             <button
               type="submit"
-              disabled={!isValid}
+              disabled={!isValid || profileIsLoading || updateProfileIsLoading}
               className="bg-black text-white font-bold py-4 px-8 mb-6 w-full rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Register
+              Update Profile
             </button>
           </form>
         </div>

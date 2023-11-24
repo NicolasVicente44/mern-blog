@@ -1,5 +1,5 @@
 import React from "react";
-import { images } from "../../constants";
+import { images, stables } from "../../constants";
 import { BsFillReplyFill } from "react-icons/bs";
 import { BiSolidEdit } from "react-icons/bi";
 import { RiDeleteBin2Fill } from "react-icons/ri";
@@ -36,12 +36,18 @@ const Comment = ({
   return (
     <div className="flex flex-nowrap items-start gap-x-3 bg-[#F2F4F5] p-3 rounded-lg">
       <img
-        src={images.postprofile1}
+        src={
+          comment?.user?.avatar
+            ? stables.UPLOAD_FOLDER_BASE_URL + comment.user.avatar
+            : images.defaultUserImage
+        }
         alt="usersprofileimage"
         className="w-9 h-9 object-cover rounded-full"
       />
       <div className="flex-1 flex flex-col">
-        <h5 className="font-bold text-black text-xs lg:text-sm">{comment.user.name}</h5>
+        <h5 className="font-bold text-black text-xs lg:text-sm">
+          {comment.user.name}
+        </h5>
         <span className="text-xs text-black">
           {new Date(comment.createdAt).toLocaleDateString("en-US", {
             day: "numeric",

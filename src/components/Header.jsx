@@ -5,14 +5,21 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/actions/user";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const navItemsInfo = [
-  { name: "Home", type: "link" },
-  { name: "Articles", type: "link" },
-  { name: "Pages", type: "dropdown", items: ["About us", "Contact us"] },
-  { name: "Pricing", type: "link" },
-  { name: "FAQ", type: "link" },
+  { name: "Home", type: "link", href: "/" },
+  { name: "Articles", type: "link", href: "/articles" },
+  {
+    name: "Pages",
+    type: "dropdown",
+    items: [
+      { title: "About us", href: "/about" },
+      { title: "Contact us", href: "/contact" },
+    ],
+  },
+  { name: "Pricing", type: "link", href: "/pricing" },
+  { name: "FAQ", type: "link", href: "faq" },
 ];
 
 const NavItem = ({ item }) => {
@@ -28,9 +35,9 @@ const NavItem = ({ item }) => {
     <li className="relative group">
       {item.type === "link" ? (
         <>
-          <a href="/" className="px-4 py-2">
+          <Link to={item.href} className="px-4 py-2">
             {item.name}
-          </a>
+          </Link>
           <span className="cursor-pointer text-black absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
             /
           </span>
@@ -53,13 +60,13 @@ const NavItem = ({ item }) => {
             {/* Content for non-link item */}
             <ul className="bg-black lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
               {item.items.map((page, index) => (
-                <a
+                <Link
                   key={index}
-                  href="/"
+                  to={page.href}
                   className="hover:bg-dark-hard lg:bg-black lg:text-white hover:text-white px-4 py-2 text-white lg:hover:bg-dark-hard z-10 lg:hover:text-white"
                 >
-                  {page}
-                </a>
+                  {page.title}
+                </Link>
               ))}
             </ul>
           </div>
