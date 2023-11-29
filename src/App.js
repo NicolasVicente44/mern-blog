@@ -6,6 +6,11 @@ import ResgisterPage from "./pages/home/register/ResgisterPage";
 import { Toaster } from "react-hot-toast";
 import Loginpage from "./pages/home/login/Loginpage";
 import ProfilePage from "./pages/home/profile/ProfilePage";
+import AdminLayout from "./pages/home/admin/AdminLayout";
+import Admin from "./pages/home/admin/screens/Admin";
+import Comments from "./pages/home/admin/screens/Comments";
+import NewPost from "./pages/home/admin/screens/posts/NewPost";
+import ManagePosts from "./pages/home/admin/screens/posts/ManagePosts";
 
 function App() {
   return (
@@ -16,6 +21,12 @@ function App() {
         <Route path="/register" element={<ResgisterPage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Admin />} />
+          <Route path="comments" index element={<Comments />} />
+          <Route path="posts/new" index element={<NewPost />} />
+          <Route path="posts/manage" index element={<ManagePosts />} />
+        </Route>
       </Routes>
       <Toaster />
     </div>

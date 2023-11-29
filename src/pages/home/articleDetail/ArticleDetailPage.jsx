@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import parseJsonToHtml from "../../../utils/parseJsonToHtml";
 import Editor from "../../../components/editor/Editor";
 import CommentsArea from "../../../components/comments/CommentsArea";
+import { useEffect } from "react";
 
 const ArticleDetailPage = () => {
   const { slug } = useParams();
@@ -25,15 +26,23 @@ const ArticleDetailPage = () => {
     queryFn: () => getSinglePost({ slug }),
     queryKey: ["blog", slug],
     onSuccess: (data) => {
-      console.log(data);
       setbreadCrumbsData([
         { name: "Home", link: "/" },
         { name: "Blog", link: "/blog" },
-        { name: "Article title", link: `/blog/${data.slug}` },
+        { name: data?.title, link: `/blog/${data.slug}` },
       ]);
+      console.log(` breadcumbs data :${breadCrumbsData}`);
+
       setBody(parseJsonToHtml(data?.body));
     },
   });
+  useEffect(() => {
+    console.log("Query Loading:", isLoading);
+    console.log("Query Error:", isError);
+    console.log("Query Data:", data);
+
+    console.log("Updated Breadcrumbs Data:", breadCrumbsData);
+  }, [breadCrumbsData]);
 
   const { data: postsData } = useQuery({
     queryFn: () => getAllPosts(),
@@ -63,7 +72,7 @@ const ArticleDetailPage = () => {
               {data?.categories.map((category) => (
                 <Link
                   to={`/blog?category=${category.name}`}
-                  className="text-primary text-sm font-roboto inline-block md:text-base"
+                  className="text-black text-sm font-roboto inline-block md:text-base"
                 >
                   {category.name}
                 </Link>
@@ -73,7 +82,7 @@ const ArticleDetailPage = () => {
               {data?.title}
             </h1>
             <div className="w-full">
-            {!isLoading && !isError && (
+              {!isLoading && !isError && (
                 <Editor content={data?.body} editable={false} />
               )}
             </div>
@@ -86,7 +95,7 @@ const ArticleDetailPage = () => {
           </article>
           <div>
             <SuggestedPosts
-              header="Latest Article"
+              header="Latest Articles"
               posts={postsData?.data}
               tags={data?.tags}
               className="mt-8 lg:mt-0 lg:max-w-xs"

@@ -10,6 +10,7 @@ import { userActions } from "../../../store/reducers/userReducers";
 import { useDispatch } from "react-redux";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useMemo } from "react";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -61,10 +62,12 @@ function ProfilePage() {
       email: "",
       password: "",
     },
-    values: {
-      name: profileIsLoading ? "" : profileData?.name || "",
-      email: profileIsLoading ? "" : profileData?.email || "",
-    },
+    values: useMemo(() => {
+      return {
+        name: profileIsLoading ? "" : profileData?.name || "",
+        email: profileIsLoading ? "" : profileData?.email || "",
+      };
+    }, [profileData.email, profileData.name, profileIsLoading]),
     mode: "onChange",
   });
 

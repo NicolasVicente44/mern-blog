@@ -144,6 +144,15 @@ const Header = () => {
                   >
                     {/* Content for non-link item */}
                     <ul className="bg-black lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
+                      {userState.userInfo?.admin && (
+                        <button
+                          onClick={() => navigate("/admin")}
+                          type="button"
+                          className="hover:bg-dark-hard lg:bg-black lg:text-white hover:text-white px-4 py-2 text-white lg:hover:bg-dark-hard z-10 lg:hover:text-white"
+                        >
+                          Admin Dashboard
+                        </button>
+                      )}
                       <button
                         onClick={() => navigate("/profile")}
                         type="button"
