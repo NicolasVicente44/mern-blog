@@ -18,11 +18,7 @@ function ProfilePage() {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
-  const {
-    data: profileData,
-    isLoading: profileIsLoading,
-    error: profileError,
-  } = useQuery({
+  const { data: profileData, isLoading: profileIsLoading } = useQuery({
     queryKey: ["profile"],
     queryFn: () => {
       return getUserProfile({ token: userState.userInfo.token });
@@ -67,7 +63,7 @@ function ProfilePage() {
         name: profileIsLoading ? "" : profileData?.name || "",
         email: profileIsLoading ? "" : profileData?.email || "",
       };
-    }, [profileData.email, profileData.name, profileIsLoading]),
+    }, [profileData?.email, profileData?.name, profileIsLoading]),
     mode: "onChange",
   });
 
