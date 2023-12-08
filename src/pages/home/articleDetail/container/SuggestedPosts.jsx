@@ -19,8 +19,8 @@ const SuggestedPosts = ({ className, header, posts = [], tags }) => {
             <img
               className="aspect-square object-cover rounded-lg w-1/5"
               src={
-                item?.image
-                  ? stables.UPLOAD_FOLDER_BASE_URL + item?.image
+                item?.photo
+                  ? stables.UPLOAD_FOLDER_BASE_URL + item?.photo
                   : images.samplePostImage
               }
               alt={item.title}
@@ -44,7 +44,9 @@ const SuggestedPosts = ({ className, header, posts = [], tags }) => {
         Tags
       </h2>
       {tags.length === 0 ? (
-        <p className="text-slate-500 text-sm mt-2">There are no tags for this post</p>
+        <p className="text-slate-500 text-sm mt-2">
+          There are no tags for this post
+        </p>
       ) : (
         <div className="flex flex-wrap gap-x-2 gap-y-2 mt-4">
           {tags.map((item, index) => (

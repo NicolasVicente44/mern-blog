@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const NavItemCollapse = ({
@@ -12,38 +11,48 @@ const NavItemCollapse = ({
 }) => {
   const [isChecked, setIsChecked] = useState(false);
 
-  useEffect(() => {
-    if (activeNavName !== name) {
-      setIsChecked(false);
+  const toggleCollapse = () => {
+    setIsChecked(!isChecked);
+    if (!isChecked) {
+      setActiveNavName(name); // Set this item as active when expanding
     }
-  }, [activeNavName, name]);
+  };
+
+  // Determine if this item is active
+  const isActive = activeNavName === name;
 
   return (
-    <div className="collapse collapse-arrow bg-base-200 min-h-0 rounded-none py-2">
+    <div
+      className={`collapse collapse-arrow bg-base-200 min-h-0 rounded-none py-2 ${
+        isActive ? "active-class" : ""
+      }`}
+    >
       <input
         type="checkbox"
         className="min-h-0 py-0"
-        checked={name === activeNavName}
-        onChange={() => {
-          setActiveNavName(name);
-          setIsChecked(!isChecked);
-        }}
+        checked={isChecked}
+        onChange={toggleCollapse}
       />
       <div
         className={`collapse-title font-medium min-h-0 py-0 pl-0 flex items-center gap-x-2 text-lg ${
-          name === activeNavName
-            ? "font-bold text-black"
-            : "font-semibold text-[#a5a5a5]"
+          isActive ? "font-bold text-black" : "font-semibold text-[#a5a5a5]"
         }`}
+        onClick={toggleCollapse}
       >
         {icon}
         {title}
       </div>
       <div className="collapse-content">
         <div className="mt-2 flex flex-col gap-y-2">
-          {content.map((item) => {
-            return <Link to={item.link}>{item.title}</Link>;
-          })}
+          {content.map((item, index) => (
+            <Link
+              key={index}
+              to={item.link}
+              onClick={() => setActiveNavName(name)}
+            >
+              {item.title}
+            </Link>
+          ))}
         </div>
       </div>
     </div>

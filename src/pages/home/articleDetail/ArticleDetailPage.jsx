@@ -78,7 +78,7 @@ const ArticleDetailPage = () => {
                 </Link>
               ))}
             </div>
-            <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
+            <h1 className="text-3xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
               {data?.title}
             </h1>
             <div className="w-full">

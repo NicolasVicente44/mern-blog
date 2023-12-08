@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import {
   AiOutlineBold,
   AiOutlineClose,
@@ -13,18 +12,10 @@ import {
 import { BiParagraph } from "react-icons/bi";
 import { FiCode } from "react-icons/fi";
 import { MdOutlineLayersClear } from "react-icons/md";
-import { PiCodeBlock, PiQuotes, PiImageSquareBold } from "react-icons/pi";
+import { PiCodeBlock, PiQuotes } from "react-icons/pi";
 import { TbSpacingVertical } from "react-icons/tb";
 
 const MenuBar = ({ editor }) => {
-  const addImage = useCallback(() => {
-    const url = window.prompt("URL");
-
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  }, [editor]);
-
   if (!editor) {
     return null;
   }
@@ -134,10 +125,6 @@ const MenuBar = ({ editor }) => {
         }`}
       >
         <BiParagraph />
-      </button>
-
-      <button onClick={addImage} className="editor-btn">
-        <PiImageSquareBold />
       </button>
 
       <button

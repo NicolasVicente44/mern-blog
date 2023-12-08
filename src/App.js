@@ -11,6 +11,7 @@ import Admin from "./pages/home/admin/screens/Admin";
 import Comments from "./pages/home/admin/screens/Comments";
 import NewPost from "./pages/home/admin/screens/posts/NewPost";
 import ManagePosts from "./pages/home/admin/screens/posts/ManagePosts";
+import EditPost from "./pages/home/admin/screens/posts/EditPost";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="comments" index element={<Comments />} />
           <Route path="posts/new" index element={<NewPost />} />
           <Route path="posts/manage" index element={<ManagePosts />} />
+          <Route path="posts/manage/edit/:slug" index element={<EditPost />} />
         </Route>
       </Routes>
       <Toaster />
