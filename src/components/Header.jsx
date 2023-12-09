@@ -156,7 +156,7 @@ const Header = () => {
                       <button
                         onClick={() => navigate("/profile")}
                         type="button"
-                        className="hover:bg-dark-hard lg:bg-black lg:text-white hover:text-white px-4 py-2 text-white lg:hover:bg-dark-hard z-10 lg:hover:text-white"
+                        className="phover:bg-dark-hard lg:bg-black lg:text-white hover:text-white px-4 py-2 text-white lg:hover:bg-dark-hard z-10 lg:hover:text-white"
                       >
                         Profile Page
                       </button>

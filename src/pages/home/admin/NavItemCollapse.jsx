@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NavItemCollapse = ({
   title,
-  content,
+  children,
   icon,
   name,
   activeNavName,
@@ -23,7 +23,7 @@ const NavItemCollapse = ({
 
   return (
     <div
-      className={`collapse collapse-arrow bg-base-200 min-h-0 rounded-none py-2 ${
+      className={`d-collapse d-collapse-arrow bg-base-200 min-h-0 rounded-none py-2 ${
         isActive ? "active-class" : ""
       }`}
     >
@@ -34,7 +34,7 @@ const NavItemCollapse = ({
         onChange={toggleCollapse}
       />
       <div
-        className={`collapse-title font-medium min-h-0 py-0 pl-0 flex items-center gap-x-2 text-lg ${
+        className={`d-collapse-title font-medium min-h-0 py-0 pl-0 flex items-center gap-x-2 text-lg ${
           isActive ? "font-bold text-black" : "font-semibold text-[#a5a5a5]"
         }`}
         onClick={toggleCollapse}
@@ -42,18 +42,8 @@ const NavItemCollapse = ({
         {icon}
         {title}
       </div>
-      <div className="collapse-content">
-        <div className="mt-2 flex flex-col gap-y-2">
-          {content.map((item, index) => (
-            <Link
-              key={index}
-              to={item.link}
-              onClick={() => setActiveNavName(name)}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
+      <div className="d-collapse-content">
+        <div className="mt-2 flex flex-col gap-y-2">{children}</div>
       </div>
     </div>
   );
