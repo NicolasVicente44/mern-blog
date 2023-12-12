@@ -133,17 +133,17 @@ const Header = () => {
                     className=" flex gap-x-1 items-center mt-5 lg:mt-0 border-2 border-[black] px-6 py-2 rounded-full text-[black] font-semibold hover:bg-[black] hover:text-white transition-all duration-300"
                     onClick={() => setProfileDropdown(!profileDropdown)}
                   >
-                    <span>Account</span>
-                    <MdKeyboardArrowDown />
+                    <span className="text-white lg:text-black">Account</span>
+                    <MdKeyboardArrowDown className="text-white lg:text-black" />
                   </button>
 
                   <div
                     className={`${
                       profileDropdown ? "block" : "hidden"
-                    } transition-all duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max`}
+                    } transition-all duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full text-white lg:group-hover:block w-max`}
                   >
                     {/* Content for non-link item */}
-                    <ul className="bg-black lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
+                    <ul className="bg-black text-white lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
                       {userState.userInfo?.admin && (
                         <button
                           onClick={() => navigate("/admin")}
@@ -156,7 +156,7 @@ const Header = () => {
                       <button
                         onClick={() => navigate("/profile")}
                         type="button"
-                        className="phover:bg-dark-hard lg:bg-black lg:text-white hover:text-white px-4 py-2 text-white lg:hover:bg-dark-hard z-10 lg:hover:text-white"
+                        className="hover:bg-dark-hard lg:bg-black lg:text-white hover:text-white px-4 py-2 text-white lg:hover:bg-dark-hard z-10 lg:hover:text-white"
                       >
                         Profile Page
                       </button>

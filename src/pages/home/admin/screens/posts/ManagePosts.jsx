@@ -2,10 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { images, stables } from "../../../../../constants";
 import { deletePost, getAllPosts } from "../../../../../services/posts";
 import { useEffect, useState } from "react";
+import Pagination from "../../../../../components/Pagination";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Pagination from "../../../../../components/Pagiantion";
 
 let isFirstRun = true;
 
@@ -35,7 +35,7 @@ const ManagePosts = () => {
       },
       onSuccess: (data) => {
         queryClient.invalidateQueries(["posts"]);
-        toast.success("Post has been deleted!");
+        toast.success("Post is deleted");
       },
       onError: (error) => {
         toast.error(error.message);
@@ -83,14 +83,14 @@ const ManagePosts = () => {
                   <input
                     type="text"
                     id='"form-subscribe-Filter'
-                    className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                    className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     placeholder="Post title..."
                     onChange={searchKeywordHandler}
                     value={searchKeyword}
                   />
                 </div>
                 <button
-                  className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-black rounded-lg shadow-md hover:bg-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-black"
+                  className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-purple-600 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
                   type="submit"
                 >
                   Filter
@@ -143,7 +143,7 @@ const ManagePosts = () => {
                   ) : postsData?.data?.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="text-center py-10 w-full">
-                        No posts found, there are no posts.
+                        No posts found
                       </td>
                     </tr>
                   ) : (
@@ -175,8 +175,9 @@ const ManagePosts = () => {
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                           <p className="text-gray-900 whitespace-no-wrap">
                             {post.categories.length > 0
-                              ? post.categories[0]
-                              : "No Category"}
+                              ? post.categories
+                              : "Uncategorized"}
+                              {console.log(post.categories)}
                           </p>
                         </td>
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
@@ -206,14 +207,14 @@ const ManagePosts = () => {
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200 space-x-5">
                           <button
                             disabled={isLoadingDeletePost}
+                            type="button"
+                            className="text-red-600 hover:text-red-900 disabled:opacity-70 disabled:cursor-not-allowed"
                             onClick={() => {
                               deletePostHandler({
                                 slug: post?.slug,
                                 token: userState.userInfo.token,
                               });
                             }}
-                            type="button"
-                            className="text-red-600 hover:text-red-900 disabled:opacity-70 disabled:cursor-not-allowed"
                           >
                             Delete
                           </button>
