@@ -32,8 +32,7 @@ export const createNewComment = async ({
     throw new Error(error.message);
   }
 };
-
-export const updateComment = async ({ token, desc, commentId }) => {
+export const updateComment = async ({ token, desc, status, commentId }) => {
   try {
     const config = {
       headers: {
@@ -45,6 +44,7 @@ export const updateComment = async ({ token, desc, commentId }) => {
       `/api/comments/${commentId}`,
       {
         desc,
+        status, // Include the status field in the request body
       },
       config
     );
@@ -53,6 +53,15 @@ export const updateComment = async ({ token, desc, commentId }) => {
     if (error.response && error.response.data.message) {
       throw new Error(error.message);
     }
+    throw new Error(error.message);
+  }
+};
+export const getAllComments = async (slug) => {
+  try {
+    const response = await axios.get(`/api/comments/byPost/${slug}`);
+    return response.data;
+  } catch (error) {
+    // Error handling
     throw new Error(error.message);
   }
 };
@@ -72,5 +81,26 @@ export const deleteComment = async ({ token, commentId }) => {
       throw new Error(error.message);
     }
     throw new Error(error.message);
+  }
+};
+export const updateCommentStatus = async ({ token, status, commentId }) => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/comments/${commentId}/status`,
+      { status },
+      config
+    );
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    }
+    throw error;
   }
 };
