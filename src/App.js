@@ -11,6 +11,11 @@ import Admin from "./pages/home/admin/screens/Admin";
 import Comments from "./pages/home/admin/screens/Comments";
 import ManagePosts from "./pages/home/admin/screens/posts/ManagePosts";
 import EditPost from "./pages/home/admin/screens/posts/EditPost";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Pricing from "./components/Pricing";
+import FAQ from "./components/FAQ";
+import Blog from "./components/Blog";
 
 function App() {
   return (
@@ -19,6 +24,11 @@ function App() {
         <Route index path="/" element={<HomePage />} />
         <Route path="/blog/:slug" element={<ArticleDetailPage />} />
         <Route path="/register" element={<ResgisterPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/articles" element={<Blog />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminLayout />}>
