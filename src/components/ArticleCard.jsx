@@ -63,7 +63,7 @@ const ArticleCard = ({ post, className }) => {
                   ) : (
                     <IoIosClose className="text-gray-800" />
                   )}
-                </span>
+                </span>npm 
                 <span className="italic text-dark-light text-xs md:text-sm">
                   {post.user.verified ? "Verified" : "Unverified"} Writer
                 </span>

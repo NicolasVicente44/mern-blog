@@ -2,7 +2,8 @@ import React from "react";
 
 const ContactChild = () => {
   return (
-    <div className="container my-24 mx-auto md:px-6">
+<div className="w-[1200px] mx-auto my-auto">
+    <div className="container  my-24 mx-auto md:px-6">
       <section className="mb-32">
         <div className="flex flex-wrap">
           <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:mb-0 md:w-7/12 md:px-3 lg:px-6">
@@ -72,12 +73,7 @@ const ContactChild = () => {
                   id="exampleInput91"
                   placeholder="Email address"
                 />
-                <label
-                  className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-gray peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none "
-                  for="exampleInput91"
-                >
-                  Email address
-                </label>
+             
               </div>
               <div className="relative mb-6" data-te-input-wrapper-init>
                 <textarea
@@ -120,6 +116,7 @@ const ContactChild = () => {
           </div>
         </div>
       </section>
+    </div>
     </div>
   );
 };
