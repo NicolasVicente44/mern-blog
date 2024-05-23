@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const BASE_URL = "https://mern-blog-backend-fd7k.onrender.com"; // Update with your backend URL
+
 export const signup = async ({ name, email, password }) => {
   try {
-    const { data } = await axios.post("/api/users/register", {
+    const { data } = await axios.post(`${BASE_URL}/api/users/register`, {
       name,
       email,
       password,
@@ -15,9 +17,10 @@ export const signup = async ({ name, email, password }) => {
     throw new Error(error.message);
   }
 };
+
 export const login = async ({ email, password }) => {
   try {
-    const { data } = await axios.post("/api/users/login", {
+    const { data } = await axios.post(`${BASE_URL}/api/users/login`, {
       email,
       password,
     });
@@ -38,7 +41,7 @@ export const getUserProfile = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.get("/api/users/profile", config);
+    const { data } = await axios.get(`${BASE_URL}/api/users/profile`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message) {
@@ -57,7 +60,7 @@ export const updateProfile = async ({ token, userData }) => {
     };
 
     const { data } = await axios.put(
-      "/api/users/updateProfile",
+      `${BASE_URL}/api/users/updateProfile`,
       userData,
       config
     );
@@ -80,7 +83,7 @@ export const updateProfilePicture = async ({ token, formData }) => {
     };
 
     const { data } = await axios.put(
-      "/api/users/updateProfilePicture",
+      `${BASE_URL}/api/users/updateProfilePicture`,
       formData,
       config
     );

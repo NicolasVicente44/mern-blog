@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const BASE_URL = "https://mern-blog-backend-fd7k.onrender.com"; // Update with your backend URL
+
 export const getAllPosts = async (searchKeyword = "", page = 1, limit = 6) => {
   try {
     const { data, headers } = await axios.get(
-      `/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `${BASE_URL}/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
@@ -15,7 +17,7 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 6) => {
 
 export const getSinglePost = async ({ slug }) => {
   try {
-    const { data } = await axios.get(`/api/posts/${slug}`);
+    const { data } = await axios.get(`${BASE_URL}/api/posts/${slug}`);
     console.log(data);
     return data;
   } catch (error) {
@@ -32,7 +34,7 @@ export const deletePost = async ({ slug, token }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await axios.delete(`/api/posts/${slug}`, config);
+    const { data } = await axios.delete(`${BASE_URL}/api/posts/${slug}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -48,7 +50,7 @@ export const updatePost = async ({ updatedData, slug, token }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await axios.put(`/api/posts/${slug}`, updatedData, config);
+    const { data } = await axios.put(`${BASE_URL}/api/posts/${slug}`, updatedData, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -64,7 +66,7 @@ export const createPost = async ({ token }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await axios.post(`/api/posts`, {}, config);
+    const { data } = await axios.post(`${BASE_URL}/api/posts`, {}, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
